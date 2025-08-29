@@ -15,7 +15,7 @@ int main()
    int size = 5;
    int pos = 2;
    int value = 99;
-
+         
    if (size < 10)
    { // Check capacity
       for (int i = size; i > pos - 1; i--)
