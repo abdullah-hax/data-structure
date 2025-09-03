@@ -76,4 +76,3 @@ int main()
     return 0;
 }
 
-// ptr != NULL er khettre => age ptr k next node link e patabe then sei link check korbe

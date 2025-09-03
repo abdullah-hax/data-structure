@@ -19,7 +19,6 @@ void nodeCount(struct node *head)
     struct node *ptr = NULL;
     ptr = head;
 
-    // kno ekta node er jnno vetorer statement execute krbe then check krbe, last node prjnto jabe.
     while (ptr != NULL)
     {
         count++;
@@ -62,6 +61,10 @@ int main()
     ptr -> link -> link = 2nd node er link k point krche
     ptr -> link -> link -> link = 3rd node link k point krche
 
+    ptr -> data = 1st node er data k point krche
+    ptr -> link -> data = 2nd node er data k point krche
+    ptr -> link -> link -> data = 3rd node er data k point krche
+
 */
 
 /*
@@ -71,8 +74,8 @@ int main()
         ptr->link != NULL  => point -> porerta check -> execute, check kore NULL pele execute krbena.
 
         mone rakar jnno sonkepe eta bola jai :
-            ptr 3rd node cross kore 4th node(NULL) e cole jai , tai 3ta execute kore
-            ptr -> 3rd prjnto ase , tai 2 ta execute kore
+            ptr != NULl         => 3rd node cross kore 4th node(NULL) e cole jai , tai 3ta execute kore
+            ptr -> link != NULL => 3rd prjnto ashe , tai 2 ta execute kore
 
 
 */

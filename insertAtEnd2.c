@@ -21,7 +21,6 @@ struct node *insertAtEnd(struct node *head)
 
     struct node *ptr = head;
 
-    ptr = head;
     while (ptr->link != NULL)
     {
         ptr = ptr->link;
@@ -65,7 +64,6 @@ int main()
     {
         printf("%d ", ptr->data);
         ptr = ptr->link;
-        // age data print krbe , pathabe then check krbe.
     }
 
     printf("\n");

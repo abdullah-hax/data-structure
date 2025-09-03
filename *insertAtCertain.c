@@ -14,7 +14,7 @@ void insertAtCertain(struct node *head, int pos){
     }
 
     struct node *new = malloc(sizeof(struct node));
-    new->data = 40;
+    new->data = 50;
     new->link = NULL;
 
     struct node *ptr = NULL;
@@ -26,7 +26,7 @@ void insertAtCertain(struct node *head, int pos){
     // }
 
     pos--;
-    while(pos != 1){
+    while(pos != 1){   
         ptr = ptr->link;
         pos--;
     }
@@ -63,8 +63,30 @@ int main() {
 
     head->link->link = temp;
 
-    int pos = 3;
+    temp = (struct node *)malloc(sizeof(struct node));
+    temp->data = 40;
+    temp->link = NULL;
+
+    head->link->link->link = temp;
+
+    int pos = 4;
 
     insertAtCertain(head, pos);
     return 0;
 }
+
+
+
+/* 
+
+    একটা লুপে যা হয় => point -> check -> execute
+
+
+    head কে point করে , 3 কে check করে
+    পরেরটা point করে , 2 কে check করে
+    পরেরটা point করে , 1 কে check করে  
+
+    অর্থাৎ , pos != 1 means => 3 বার point করবে, তাই pos-- দেয়া হয় , যাতে 2 বার point করে
+
+
+*/
