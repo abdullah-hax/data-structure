@@ -1,71 +1,63 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-struct node
-{
+
+
+struct node{
+    struct node *prev;
     int data;
-    struct node *link;
+    struct node *next;
 };
 
-void count(struct node *head)
-{
-    int count = 1 ;
- 
-    if(head == NULL) {
-        printf("empty");
-    }
 
-    struct node *temp = malloc(sizeof(struct node));
-    temp->data = 40;
-    temp->link = NULL;
-
-    struct node *ptr = NULL;
-
-    // ptr = head;
-    // while (ptr->link != NULL) // point -> porerta check -> execute
-    // {
-    //     ptr = ptr->link;
-    // }
-
-    // ptr->link = temp;
-
-    ptr = head;
-    while (count < 3 - 1)
-    {
-        count++;
-        ptr = ptr->link;
-    }
-
-    temp->link = ptr->link;
-    ptr->link = temp;
-
-    ptr = head;
-    while(ptr != NULL){
-        printf("%d ", ptr->data);
-        ptr = ptr->link;
-    }
-}
-
-int main()
-{
-
+int main() {
     struct node *head = malloc(sizeof(struct node));
+    head->prev = NULL;
     head->data = 10;
-    head->link = NULL;
+    head->next = NULL;
 
     struct node *temp = malloc(sizeof(struct node));
+    temp->prev = NULL;
     temp->data = 20;
-    temp->link = NULL;
+    temp->next = NULL;
+    
+    head->next = temp;
+    temp->prev = head;
+    
+    temp = malloc(sizeof(struct node));
+    temp->prev = NULL;
+    temp->data = 30;
+    temp->next = NULL;
 
-    head->link = temp;
+    head->next->next = temp;
+    temp->prev = head->next;
 
     temp = malloc(sizeof(struct node));
-    temp->data = 30;
-    temp->link = NULL;
+    temp->prev = NULL;
+    temp->data = 40;
+    temp->next = NULL;
 
-    head->link->link = temp;
+    head->next->next->next = temp;
+    temp->prev = head->next->next;
 
-    count(head);
+    temp = malloc(sizeof(struct node));
+    temp->prev = NULL;
+    temp->data = 50;
+    temp->next = NULL;
+
+    head->next->next->next->next = temp;
+    temp->prev = head->next->next->next;
+
+
+    struct node *ptr = head;
+
+    while(ptr != NULL){
+        printf("%d ", ptr->data);
+        ptr = ptr->next;
+    }
+    
+
+
 
     return 0;
 }

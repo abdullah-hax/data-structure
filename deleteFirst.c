@@ -17,8 +17,6 @@ void del_first(struct node *head){
     head = head -> link;
 
     free(temp);
-    temp = NULL;
-
 
     struct node *ptr = malloc(sizeof(struct node));
     ptr = head;
