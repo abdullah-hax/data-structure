@@ -6,20 +6,30 @@ struct node{
     struct node *link;
 };
 
-void del_first(struct node *head){
+void del_last(struct node *head){
     if(head == NULL){
         printf("List is already empty");
+        return;
     }
 
-    struct node *temp = malloc(sizeof(struct node));
-    struct node *ptr = malloc(sizeof(struct node));
+
+    // Case 1 : Only 1 node
+    if(head->link == NULL){
+        free(head);
+        return;
+    }
+
+    // Case 2 : More than 1 node
+    struct node *ptr ;
 
     ptr = head; 
-    while(ptr->link != NULL){
+    while(ptr->link->link != NULL){
         ptr = ptr->link;
     }
 
-    ptr = NULL;
+    free(ptr->link);
+
+    ptr->link = NULL;
  
     ptr = head;
     while(ptr != NULL){
@@ -53,6 +63,6 @@ int main() {
     head->link->link->link = temp;
 
 
-    del_first(head);
+    del_last(head);
     return 0;
 }

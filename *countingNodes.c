@@ -74,8 +74,8 @@ int main()
         ptr->link != NULL  => point -> porerta check -> execute, check kore NULL pele execute krbena.
 
         mone rakar jnno sonkepe eta bola jai :
-            ptr != NULl         => 3rd node cross kore 4th node(NULL) e cole jai , tai 3ta execute kore
-            ptr -> link != NULL => 3rd prjnto ashe , tai 2 ta execute kore
+            ptr != NULl         => 3rd node cross kore 4th node(NULL) e cole jai , tai 3ta execute kore (summary : ek ghor besi jabe)
+            ptr -> link != NULL => 3rd prjnto ashe , tai 2 ta execute kore (summary : borabor thakbe)
 
 
 */
