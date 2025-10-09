@@ -8,32 +8,19 @@ struct node {
 };
 
 
-void insertion(struct node *head, int data, int pos){
+void del_first(struct node *head){
     if(head == NULL){
         printf("Empty");
+        return;
     }
-
-    int count = 1;
 
     struct node *temp = NULL;
-
-    temp = malloc(sizeof(struct node));
-    temp->prev = NULL;
-    temp->data = data;
-    temp->next = NULL;
-
-    struct node *ptr = head;
-    while(count <= pos-2){   // 3no. e add krte caile 2no. node er pore add krte hbe("tai 1 komate hbe"). amra jani normally pointer ek ghor besi cole jai (node count krte thik i count kore, jaor belai ek ghor besi cole jai) , "tai aro 1 komate hbe". 
-        count++;
-        ptr = ptr->next;
-    }
-
-    temp->next = ptr->next;
-    ptr->next->prev = temp;
-
-    ptr->next = temp;
-    temp->prev = ptr;
-
+    temp = head;
+    head = temp->next;
+    head->prev = NULL;
+    free(temp);
+    
+    struct node *ptr = NULL;
     ptr = head;
     while(ptr != NULL){
         printf("%d ", ptr->data);
@@ -75,10 +62,11 @@ int main(){
     head->next->next->next = temp;
     temp->prev = head->next->next;
 
-    insertion(head, 50, 3);
+    del_first(head);
 
 
 }
 
 
-// insertAtAnyPoint
+
+// nodeCreate(head)

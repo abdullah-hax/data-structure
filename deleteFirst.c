@@ -9,16 +9,17 @@ struct node{
 void del_first(struct node *head){
     if(head == NULL){
         printf("List is already empty");
+        return;
     }
 
-    struct node *temp = malloc(sizeof(struct node));
+    struct node *temp = NULL;
 
     temp = head;
     head = head -> link;
 
     free(temp);
 
-    struct node *ptr = malloc(sizeof(struct node));
+    struct node *ptr = NULL;
     ptr = head;
     while(ptr != NULL){
         printf("%d ", ptr->data);

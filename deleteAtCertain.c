@@ -9,28 +9,36 @@ struct node{
 void del_certain(struct node *head, int pos){
     if(head == NULL){
         printf("List is already empty");
+        return;
     }
 
-    struct node *ptr = malloc(sizeof(struct node));
+    struct node *previous = head;
+    struct node *current = head;
 
-    ptr = head;
+    // Case 1: delete first node
+    if(pos == 1){
+        head = head->link;
+        free(current);
+    } 
+    
+    // Case 2: delete node at other position
+    else {
+        
+        while(pos > 1){
+            previous = current;
+            current = current->link;
+            pos--;
 
-    pos--;
-    while(pos != 1){
-        ptr = ptr->link;
-        pos--;
+        }
+
+        previous->link = current->link;
+        free(current);
     }
 
-    struct node *temp = malloc(sizeof(struct node));
 
-    temp = ptr->link;
-
-    ptr->link = temp->link;
-
-    free(temp);
+    struct node *ptr = NULL;
 
     ptr = head;
-
     while(ptr != NULL){
         printf("%d ", ptr->data);
         ptr = ptr->link;
@@ -67,9 +75,7 @@ int main() {
     temp->link = NULL;
     head->link->link->link->link = temp;
 
-
-    int pos = 3;
   
-    del_certain(head, pos);
+    del_certain(head, 1);
     return 0;
 }

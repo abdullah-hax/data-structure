@@ -13,8 +13,8 @@ void del_last(struct node *head){
     }
 
 
-    // Case 1 : Only 1 node
-    if(head->link == NULL){
+    // Case 1 : Only 1 node    // ptr->link->link thakar karone ekta node er case consider krte hbe.
+    if(head->link == NULL){   
         free(head);
         return;
     }

@@ -69,7 +69,7 @@ int main() {
 
     head->link->link->link = temp;
 
-    int pos = 4;
+    int pos = 2;
 
     insertAtCertain(head, pos);
     return 0;
