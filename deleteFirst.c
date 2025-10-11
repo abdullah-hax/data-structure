@@ -12,6 +12,13 @@ void del_first(struct node *head){
         return;
     }
 
+    // case 1 : only one node  (good practise)
+    if(head->link == NULL){
+        free(head);
+        return;
+    }
+
+    // case 2 : more than 1 node
     struct node *temp = NULL;
 
     temp = head;

@@ -15,6 +15,7 @@ void del_certain(struct node *head, int pos){
     struct node *previous = head;
     struct node *current = head;
 
+   
     // Case 1: delete first node
     if(pos == 1){
         head = head->link;
@@ -76,6 +77,6 @@ int main() {
     head->link->link->link->link = temp;
 
   
-    del_certain(head, 1);
+    del_certain(head, 5);
     return 0;
 }

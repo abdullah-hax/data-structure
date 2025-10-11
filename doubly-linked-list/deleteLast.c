@@ -14,6 +14,13 @@ void del_last(struct node *head){
         return;
     }
 
+    // case 1 : only 1 node
+    if(head->next == NULL){
+        free(head);
+        return;
+    }
+
+    // case 2 : more than 1 node
     struct node *temp = NULL;
     temp = head;
     while(temp->next->next != NULL){
@@ -40,7 +47,7 @@ int main(){
 
     struct node *temp = NULL;
 
-    temp = malloc(sizeof(struct node));
+    temp = malloc(sizeof(struct node));  //  ekbar declare kore felsi , tai ar krtesina.
     temp->prev = NULL;
     temp->data = 20;
     temp->next = NULL;
@@ -48,7 +55,7 @@ int main(){
     head->next = temp;
     temp->prev = head;
 
-    temp = malloc(sizeof(struct node));  //  ekbar declare kore felsi , tai ar krtesina.
+    temp = malloc(sizeof(struct node)); 
     temp->prev = NULL;
     temp->data = 30;
     temp->next = NULL;
