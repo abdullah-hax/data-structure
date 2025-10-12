@@ -1,68 +1,83 @@
+/* 
+
+    delFirst er khetrre must head k return krte hoi
+    but delLast e retrun na krleo problem hoina .
+
+    why ? cinta kore deko.
+
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 
 struct node{
-    int data;
+    int data ;
     struct node *link;
 };
 
-void del_last(struct node *head){
+
+struct node * delLast(struct node *head){
     if(head == NULL){
-        printf("List is already empty");
-        return;
+        printf("empty");
+        return head;
     }
 
-
     // Case 1 : Only 1 node    // ptr->link->link thakar karone 1 node er case 'must' consider krte hbe.
-    if(head->link == NULL){   
-        free(head);
-        return;
+    if(head->link == NULL){
+        free(head);   // free() use krle head jei node k point krse se free hoi but head = NULL hoina. 
+        return head;
     }
 
     // Case 2 : More than 1 node
-    struct node *ptr ;
-
-    ptr = head; 
-    while(ptr->link->link != NULL){
-        ptr = ptr->link;
+    struct node *temp = head;
+    while(temp->link->link != NULL){   // 1 node er khettre temp->link er link nai , tai compiler eta check krte gie segmantion fault dibe.
+        temp = temp->link;
     }
 
-    free(ptr->link);
+    free(temp->link);
 
-    ptr->link = NULL;
- 
-    ptr = head;
-    while(ptr != NULL){
-        printf("%d ", ptr->data);
-        ptr = ptr->link;
-    }
+    temp->link = NULL;
 
+    return head;
 }
 
-int main() {
-    struct node *head = NULL;
-    head = (struct node *)malloc(sizeof(struct node));
-    head->data = 10;
+void printList(struct node *head){
+    while(head != NULL){
+        printf("%d ", head->data);
+        head = head->link;
+    }
+}
+
+
+int main(){
+    struct node *head = malloc(sizeof(struct node));
+    head->data = 1;
     head->link = NULL;
 
-    struct node *temp = NULL;
-    temp = (struct node *)malloc(sizeof(struct node));
-    temp->data = 20;
+    struct node *temp = malloc(sizeof(struct node));
+    temp->data = 2;
     temp->link = NULL;
 
     head->link = temp;
 
-    temp = (struct node *)malloc(sizeof(struct node));
-    temp->data = 30;
+    temp = malloc(sizeof(struct node));
+    temp->data = 3;
     temp->link = NULL;
-    head->link->link = temp;
 
-    temp = (struct node *)malloc(sizeof(struct node));
-    temp->data = 40;
+    head->link->link = temp;
+    
+    temp = malloc(sizeof(struct node));
+    temp->data = 4;
     temp->link = NULL;
+
     head->link->link->link = temp;
 
+    printList(head);
+    printf("\nAfter deleting : ");
 
-    del_last(head);
-    return 0;
+    head = delLast(head);
+
+    printList(head);
+
 }
+
