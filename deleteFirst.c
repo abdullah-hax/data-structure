@@ -9,7 +9,7 @@ struct node{
 struct node* del_first(struct node *head){
     if(head == NULL){
         printf("List is already empty");
-        return head;
+        return NULL;
     }
 
     // singly delFirst e 1 node er kno impact nai.

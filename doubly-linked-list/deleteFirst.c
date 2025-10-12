@@ -7,64 +7,71 @@ struct node {
     struct node *next;
 };
 
-void del_first(struct node *head){
-
+struct node *delFirst(struct node *head){
     if(head == NULL){
-        printf("Empty");
-        return;
+        printf("empty");
+        return NULL;
     }
 
     // case 1 : only 1 node
     if(head->next == NULL){
         free(head);
-        return;
+        return NULL;
     }
-    
+
     // case 2 : more than 1 node
-    struct node *ptr = head;
+    struct node *temp = head;
+
     head = head->next;
     head->prev = NULL;
 
-    free(ptr);
+    free(temp);
 
-    ptr = head;
-    while(ptr != NULL){
-        printf("%d ", ptr->data);
-        ptr = ptr->next;
+    return head;
+}
+
+void printList(struct node *head){
+    while(head != NULL){
+        printf("%d ", head->data);
+        head = head->next;
     }
 }
 
 int main(){
-    struct node *head = NULL;
-
-    head = malloc(sizeof(struct node));
+    struct node *head = malloc(sizeof(struct node));
     head->prev = NULL;
-    head->data = 10;
+    head->data = 1;
     head->next = NULL;
-    
-    struct node *temp = NULL;
-    
-    temp = malloc(sizeof(struct node));
-    head->prev = NULL;
-    temp->data = 20;
+
+    struct node *temp = malloc(sizeof(struct node));
+    temp->prev = NULL;
+    temp->data = 2;
     temp->next = NULL;
+
     head->next = temp;
     temp->prev = head;
-    
+
     temp = malloc(sizeof(struct node));
-    head->prev = NULL;
-    temp->data = 30;
+    temp->prev = NULL;
+    temp->data = 3;
     temp->next = NULL;
+
     head->next->next = temp;
     temp->prev = head->next;
-    
+
     temp = malloc(sizeof(struct node));
-    head->prev = NULL;
-    temp->data = 40;
+    temp->prev = NULL;
+    temp->data = 4;
     temp->next = NULL;
+
     head->next->next->next = temp;
     temp->prev = head->next->next;
 
-    del_first(head);
+    printList(head);
+    printf("\nAfter deleting : ");
+
+    head = delFirst(head);
+
+    printList(head);
 
 }

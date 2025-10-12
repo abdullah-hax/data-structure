@@ -19,13 +19,13 @@ struct node{
 struct node * delLast(struct node *head){
     if(head == NULL){
         printf("empty");
-        return head;
+        return NULL;
     }
 
     // Case 1 : Only 1 node    // ptr->link->link thakar karone 1 node er case 'must' consider krte hbe.
     if(head->link == NULL){
         free(head);   // free() use krle head jei node k point krse se free hoi but head = NULL hoina. 
-        return head;
+        return NULL;
     }
 
     // Case 2 : More than 1 node

@@ -6,23 +6,23 @@ struct node{
     struct node *link;
 };
 
-void del_certain(struct node *head, int pos){
+struct node * del_certain(struct node *head, int pos){
     if(head == NULL){
         printf("List is already empty");
-        return;
+        return NULL;
     }
 
     struct node *previous = head;
     struct node *current = head;
 
    
-    // Case 1: delete first node
+    // Case 1: delete first node (1 node er impact nai)
     if(pos == 1){
         head = head->link;
         free(current);
     } 
     
-    // Case 2: delete node at other position
+    // Case 2: delete node at other position (last position er impact nai)
     else {
         
         while(pos > 1){
@@ -36,47 +36,51 @@ void del_certain(struct node *head, int pos){
         free(current);
     }
 
+    return head;
+}
 
-    struct node *ptr = NULL;
 
-    ptr = head;
-    while(ptr != NULL){
-        printf("%d ", ptr->data);
-        ptr = ptr->link;
+void printList(struct node *head){
+    while(head != NULL){
+        printf("%d ", head->data);
+        head = head->link;
     }
-
-
 }
 
 int main() {
     struct node *head = NULL;
     head = (struct node *)malloc(sizeof(struct node));
-    head->data = 10;
+    head->data = 1;
     head->link = NULL;
 
     struct node *temp = NULL;
     temp = (struct node *)malloc(sizeof(struct node));
-    temp->data = 20;
+    temp->data = 2;
     temp->link = NULL;
 
     head->link = temp;
 
     temp = (struct node *)malloc(sizeof(struct node));
-    temp->data = 30;
+    temp->data = 3;
     temp->link = NULL;
     head->link->link = temp;
 
     temp = (struct node *)malloc(sizeof(struct node));
-    temp->data = 40;
+    temp->data = 4;
     temp->link = NULL;
     head->link->link->link = temp;
     
     temp = (struct node *)malloc(sizeof(struct node));
-    temp->data = 50;
+    temp->data = 5;
     temp->link = NULL;
     head->link->link->link->link = temp;
 
-  
-    del_certain(head, 5);
+    printList(head);
+    printf("\nAfter deleting : ");
+
+    head = del_certain(head, 1);
+
+    printList(head);
+
     return 0;
 }

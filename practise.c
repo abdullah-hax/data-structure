@@ -1,66 +1,77 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-struct node{
-    int data ;
-    struct node *link;
+struct node {
+    struct node *prev;
+    int data;
+    struct node *next;
 };
 
-
-void delLast(struct node *head){
+struct node *delFirst(struct node *head){
     if(head == NULL){
         printf("empty");
-        return;
+        return NULL;
     }
 
-    // Case 1 : Only 1 node    // ptr->link->link thakar karone 1 node er case 'must' consider krte hbe.
-    if(head->link == NULL){
+    // case 1 : only 1 node
+    if(head->next == NULL){
         free(head);
-        return;
+        return NULL;
     }
 
-    // Case 2 : More than 1 node
+    // case 2 : more than 1 node
     struct node *temp = head;
-    while(temp->link->link != NULL){   // 1 node er khettre temp->link er link nai , tai compiler eta check krte gie segmantion fault dibe.
-        temp = temp->link;
-    }
 
-    free(temp->link);
+    head = head->next;
+    head->prev = NULL;
 
-    temp->link = NULL;
+    free(temp);
 
+    return head;
+}
 
-    temp = head;
-    while(temp != NULL){
-        printf("%d ", temp->data);
-        temp = temp->link;
+void printList(struct node *head){
+    while(head != NULL){
+        printf("%d ", head->data);
+        head = head->next;
     }
 }
 
-
 int main(){
     struct node *head = malloc(sizeof(struct node));
+    head->prev = NULL;
     head->data = 1;
-    head->link = NULL;
+    head->next = NULL;
 
     struct node *temp = malloc(sizeof(struct node));
+    temp->prev = NULL;
     temp->data = 2;
-    temp->link = NULL;
+    temp->next = NULL;
 
-    head->link = temp;
+    head->next = temp;
+    temp->prev = head;
 
     temp = malloc(sizeof(struct node));
+    temp->prev = NULL;
     temp->data = 3;
-    temp->link = NULL;
+    temp->next = NULL;
 
-    head->link->link = temp;
-    
+    head->next->next = temp;
+    temp->prev = head->next;
+
     temp = malloc(sizeof(struct node));
+    temp->prev = NULL;
     temp->data = 4;
-    temp->link = NULL;
+    temp->next = NULL;
 
-    head->link->link->link = temp;
+    head->next->next->next = temp;
+    temp->prev = head->next->next;
 
-    delLast(head);
+    printList(head);
+    printf("\nAfter deleting : ");
+
+    head = delFirst(head);
+
+    printList(head);
 
 }
