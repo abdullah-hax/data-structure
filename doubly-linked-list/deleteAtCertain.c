@@ -7,74 +7,70 @@ struct node {
     struct node *next;
 };
 
-
-void del_certain(struct node *head, int pos){
+struct node *delFirst(struct node *head, int pos){
     if(head == NULL){
-        printf("Empty");
-        return;
+        printf("empty");
+        return NULL;
     }
 
-    // struct node *previous = head;
     struct node *current = head;
 
-    // case 1 : delet at 1st pos
-    if (pos == 1){
+    if(head->next == NULL){
+        free(head);
+        return NULL;
+    }
 
+    // case 1 : delete at pos 1
+    if(pos == 1){
         head = head->next;
-        if(head != NULL){  // case 1a : if condition is for only 1 node
+        if(head->next != NULL){   // case 1a : only 1 node
             head->prev = NULL;
         }
-        free(current);
-    }
-
-    // case 2 : delete at another pos
-    else{
-
-        while(pos > 1){
-            current = current->next;
-            pos--;
-        } 
-
-        current->prev->next = current->next;
-
-        if(current->next != NULL){    // case 2a : if condition is for last pos
-            current->next->prev = current->prev;
-        }
 
         free(current);
-        
+        return head;
     }
-    
-    
-    struct node *temp = NULL;
-    temp = head;
-    while(temp != NULL){
-        printf("%d ", temp->data);
-        temp = temp->next;
+
+    // case 2 : delete at onother pos
+    while(pos > 1){
+        current = current->next;
+        pos--;
+    }
+
+    current->prev->next = current->next;
+    if(current->next != NULL){     // case 2a : last pos
+        current->next->prev = current->prev;
+    }
+
+    free(current);
+   
+    return head;
+}
+
+void printList(struct node *head){
+    while(head != NULL){
+        printf("%d ", head->data);
+        head = head->next;
     }
 }
 
 int main(){
-    struct node *head = NULL;
-
-    head = malloc(sizeof(struct node));
+    struct node *head = malloc(sizeof(struct node));
     head->prev = NULL;
-    head->data = 10;
+    head->data = 1;
     head->next = NULL;
 
-    struct node *temp = NULL;
-
-    temp = malloc(sizeof(struct node));  //  ekbar declare kore felsi , tai ar krtesina.
+    struct node *temp = malloc(sizeof(struct node));
     temp->prev = NULL;
-    temp->data = 20;
+    temp->data = 2;
     temp->next = NULL;
 
     head->next = temp;
     temp->prev = head;
 
-    temp = malloc(sizeof(struct node)); 
+    temp = malloc(sizeof(struct node));
     temp->prev = NULL;
-    temp->data = 30;
+    temp->data = 3;
     temp->next = NULL;
 
     head->next->next = temp;
@@ -82,14 +78,17 @@ int main(){
 
     temp = malloc(sizeof(struct node));
     temp->prev = NULL;
-    temp->data = 40;
+    temp->data = 4;
     temp->next = NULL;
 
     head->next->next->next = temp;
     temp->prev = head->next->next;
 
-    del_certain(head, 3);
+    printList(head);
+    printf("\nAfter deleting : ");
+
+    head = delFirst(head, 1);
+
+    printList(head);
 
 }
-
-

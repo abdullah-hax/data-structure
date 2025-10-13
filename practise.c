@@ -7,26 +7,43 @@ struct node {
     struct node *next;
 };
 
-struct node *delFirst(struct node *head){
+struct node *delFirst(struct node *head, int pos){
     if(head == NULL){
         printf("empty");
         return NULL;
     }
 
-    // case 1 : only 1 node
+    struct node *current = head;
+
     if(head->next == NULL){
         free(head);
         return NULL;
     }
 
-    // case 2 : more than 1 node
-    struct node *temp = head;
+    // case 1 : delete at pos 1
+    if(pos == 1){
+        head = head->next;
+        if(head->next != NULL){   // case 1a : only 1 node
+            head->prev = NULL;
+        }
 
-    head = head->next;
-    head->prev = NULL;
+        free(current);
+        return head;
+    }
 
-    free(temp);
+    // case 2 : delete at onother pos
+    while(pos > 1){
+        current = current->next;
+        pos--;
+    }
 
+    current->prev->next = current->next;
+    if(current->next != NULL){     // case 2a : last pos
+        current->next->prev = current->prev;
+    }
+
+    free(current);
+   
     return head;
 }
 
@@ -70,7 +87,7 @@ int main(){
     printList(head);
     printf("\nAfter deleting : ");
 
-    head = delFirst(head);
+    head = delFirst(head, 1);
 
     printList(head);
 

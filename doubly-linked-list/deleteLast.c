@@ -7,57 +7,54 @@ struct node {
     struct node *next;
 };
 
-
-void del_last(struct node *head){
+struct node *delFirst(struct node *head){
     if(head == NULL){
-        printf("Empty");
-        return;
+        printf("empty");
+        return NULL;
     }
 
     // case 1 : only 1 node
     if(head->next == NULL){
         free(head);
-        return;
+        return NULL;
     }
 
-    // case 2 : more than 1 node
-    struct node *temp = NULL;
-    temp = head;
-    while(temp->next->next != NULL){
-        temp = temp->next;
+    // case 2 : more than 1 node  
+    struct node *temp = head;
+    while(temp->next->next != NULL){  // 1 node er khettre temp->next er next nai tai seg. fault khabe. 
+        temp = temp->next; 
     }
-    
+
     free(temp->next);
     temp->next = NULL;
-    
-    temp = head;
-    while(temp != NULL){
-        printf("%d ", temp->data);
-        temp = temp->next;
+
+    return head;
+}
+
+void printList(struct node *head){
+    while(head != NULL){
+        printf("%d ", head->data);
+        head = head->next;
     }
 }
 
 int main(){
-    struct node *head = NULL;
-
-    head = malloc(sizeof(struct node));
+    struct node *head = malloc(sizeof(struct node));
     head->prev = NULL;
-    head->data = 10;
+    head->data = 1;
     head->next = NULL;
 
-    struct node *temp = NULL;
-
-    temp = malloc(sizeof(struct node));  //  ekbar declare kore felsi , tai ar krtesina.
+    struct node *temp = malloc(sizeof(struct node));
     temp->prev = NULL;
-    temp->data = 20;
+    temp->data = 2;
     temp->next = NULL;
 
     head->next = temp;
     temp->prev = head;
 
-    temp = malloc(sizeof(struct node)); 
+    temp = malloc(sizeof(struct node));
     temp->prev = NULL;
-    temp->data = 30;
+    temp->data = 3;
     temp->next = NULL;
 
     head->next->next = temp;
@@ -65,17 +62,17 @@ int main(){
 
     temp = malloc(sizeof(struct node));
     temp->prev = NULL;
-    temp->data = 40;
+    temp->data = 4;
     temp->next = NULL;
 
     head->next->next->next = temp;
     temp->prev = head->next->next;
 
-    del_last(head);
+    printList(head);
+    printf("\nAfter deleting : ");
 
+    head = delFirst(head);
+
+    printList(head);
 
 }
-
-
-
-// nodeCreate(head)
