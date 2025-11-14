@@ -1,128 +1,134 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-struct node{
+struct node
+{
     int data;
     struct node *link;
 };
 
-struct node* del_first(struct node *head){
-    if(head == NULL){
-        printf("List is already empty");
-        return NULL;
+void insertAtBeg(struct node *head)
+{
+    if (head == NULL)
+    {
+        printf("Linked list is empty");
+        return;
     }
 
-    // singly delFirst e 1 node er kno impact nai.
-    struct node *temp = NULL;
-    temp = head;
-    head = head -> link;
+    // Edge case nai
 
-    free(temp);   // free() use krle temp jei node k point krse se free hoi but temp = NULL hoina. 
+    struct node *temp = (struct node *)malloc(sizeof(struct node));
+    temp->data = 67;
+    temp->link = NULL;
 
+    temp->link = head;
+    head = temp;
+
+    
     temp = head;
-    while(temp != NULL){
+    while (temp != NULL)
+    {
         printf("%d ", temp->data);
         temp = temp->link;
     }
-
-    return head;
-
 }
 
-int main() {
+int main()
+{
     struct node *head = NULL;
     head = (struct node *)malloc(sizeof(struct node));
-    head->data = 1;
+    head->data = 10;
     head->link = NULL;
 
     struct node *temp = NULL;
     temp = (struct node *)malloc(sizeof(struct node));
-    temp->data = 2;
+    temp->data = 20;
     temp->link = NULL;
 
     head->link = temp;
 
     temp = (struct node *)malloc(sizeof(struct node));
-    temp->data = 3;
+    temp->data = 30;
     temp->link = NULL;
     head->link->link = temp;
 
     temp = (struct node *)malloc(sizeof(struct node));
-    temp->data = 4;
+    temp->data = 40;
     temp->link = NULL;
     head->link->link->link = temp;
 
+    insertAtBeg(head);
 
-    head = del_first(head);
     return 0;
 }
-
-
 
 /* 
 
 #include <stdio.h>
 #include <stdlib.h>
 
-struct node{
+struct node
+{
     int data;
     struct node *link;
 };
 
-struct node* del_first(struct node *head){
-    if(head == NULL){
-        printf("List is already empty");
-        return head;
+struct node * insertAtBeg(struct node *head)
+{
+    if (head == NULL)
+    {
+        printf("Linked list is empty");
+        return NULL;
     }
 
-    // singly delFirst e 1 node er kno impact nai.
-    struct node *temp = NULL;
-    temp = head;
-    head = head -> link;
+    struct node *temp = (struct node *)malloc(sizeof(struct node));
+    temp->data = 67;
+    temp->link = NULL;
 
-    free(temp);   // free() use krle temp jei node k point krse se free hoi but temp = NULL hoina. 
-
+    temp->link = head;
+    head = temp;
+ 
     return head;
 }
 
 void printList(struct node *head){
-     while(head != NULL){
+    while(head != NULL){
         printf("%d ", head->data);
         head = head->link;
     }
+    printf("\nAfter deleting: ");
 }
 
-int main() {
+int main()
+{
     struct node *head = NULL;
     head = (struct node *)malloc(sizeof(struct node));
-    head->data = 1;
+    head->data = 10;
     head->link = NULL;
 
     struct node *temp = NULL;
     temp = (struct node *)malloc(sizeof(struct node));
-    temp->data = 2;
+    temp->data = 20;
     temp->link = NULL;
 
     head->link = temp;
 
     temp = (struct node *)malloc(sizeof(struct node));
-    temp->data = 3;
+    temp->data = 30;
     temp->link = NULL;
     head->link->link = temp;
 
     temp = (struct node *)malloc(sizeof(struct node));
-    temp->data = 4;
+    temp->data = 40;
     temp->link = NULL;
     head->link->link->link = temp;
 
     printList(head);
-    printf("\nAfter deleting : ");
-
-    head = del_first(head);
-
+    head = insertAtBeg(head);
     printList(head);
 
     return 0;
 }
+
 
 */

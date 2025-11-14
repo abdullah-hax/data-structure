@@ -16,22 +16,20 @@ void insertAtEnd(struct node *head)
         return;
     }
 
-    struct node *newNode = (struct node *)malloc(sizeof(struct node));
-    newNode->data = 67;
-    newNode->link = NULL;
+    // Edge case nai
 
-    struct node *ptr = head;
+    struct node *temp = (struct node *)malloc(sizeof(struct node));
+    temp->data = 67;
+    temp->link = NULL;
+
+    struct node *ptr = NULL;
     ptr = head;
-
-
-    while (ptr->link != NULL)
+    while (ptr != NULL)
     {
         ptr = ptr->link;
     }
 
-    ptr->link = newNode;
-
-
+    ptr = temp;
 
     ptr = head;
     while (ptr != NULL)

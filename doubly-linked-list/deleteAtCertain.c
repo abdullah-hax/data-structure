@@ -15,15 +15,10 @@ struct node *delFirst(struct node *head, int pos){
 
     struct node *current = head;
 
-    if(head->next == NULL){
-        free(head);
-        return NULL;
-    }
-
     // case 1 : delete at pos 1
     if(pos == 1){
         head = head->next;
-        if(head->next != NULL){   // case 1a : only 1 node
+        if(head != NULL){   // case 1a : only 1 node
             head->prev = NULL;
         }
 
