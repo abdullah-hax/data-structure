@@ -7,7 +7,7 @@ struct node {
     struct node *next;
 };
 
-struct node *delFirst(struct node *head, int pos){
+struct node *delAtCertain(struct node *head, int pos){
     if(head == NULL){
         printf("empty");
         return NULL;
@@ -82,7 +82,7 @@ int main(){
     printList(head);
     printf("\nAfter deleting : ");
 
-    head = delFirst(head, 1);
+    head = delAtCertain(head, 1);
 
     printList(head);
 
